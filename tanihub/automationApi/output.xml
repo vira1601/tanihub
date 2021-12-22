@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.2.2 (Python 3.8.5 on win32)" generated="20211222 15:12:30.555" rpa="false">
+<suite id="s1" name="Api Vehicles" source="C:\Users\warung pintar\Documents\tanihub\automationApi\TestCase\api_vehicles.robot">
+<test id="s1-t1" name="Get All Vehicles Info">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>get_vehicle</arg>
+<arg>${base_url}</arg>
+<arg>verify=true</arg>
+</arguments>
+<msg timestamp="20211222 15:12:30.923" level="INFO">Creating Session using : alias=get_vehicle, url=https://ghibliapi.herokuapp.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20211222 15:12:30.922" endtime="20211222 15:12:30.924"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20211222 15:12:30.925" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20211222 15:12:30.925" endtime="20211222 15:12:30.925"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>get_vehicle</arg>
+<arg>${get_endpoint}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20211222 15:12:31.930" level="INFO">GET Request : url=https://ghibliapi.herokuapp.com/vehicles/ 
+ path_url=/vehicles/ 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json'} 
+ body=None 
+ </msg>
+<msg timestamp="20211222 15:12:31.930" level="INFO">GET Response : url=https://ghibliapi.herokuapp.com/vehicles/ 
+ status=200, reason=OK 
+ body=[
+  {
+    "id": "4e09b023-f650-4747-9ab9-eacf14540cfb",
+    "name": "Air Destroyer Goliath",
+    "description": "A military airship utilized by the government to access Laputa",
+    "vehicle_class": "Airship",
+    "length": "1,000",
+    "pilot": "https://ghibliapi.herokuapp.com/people/40c005ce-3725-4f15-8409-3e1b1b14b583",
+    "films": [
+      "https://ghibliapi.herokuapp.com/films/2baf70d1-42bb-4437-b551-e5fed5a87abe"
+    ],
+    "url": "https://ghibliapi.herokuapp.com/vehicles/4e09b023-f650-4747-9ab9-eacf14540cfb"
+  },
+  {
+    "id": "d8f893b5-1dd9-41a1-9918-0099c1aa2de8",
+    "name": "Red Wing",
+    "description": "An experimental aircraft captured by Porco. Named Savoia S.21",
+    "vehicle_class": "Airplane",
+    "length": "20",
+    "pilot": "https://ghibliapi.herokuapp.com/people/6523068d-f5a9-4150-bf5b-76abe6fb42c3",
+    "films": [
+      "https://ghibliapi.herokuapp.com/films/ebbb6b7c-945c-41ee-a792-de0e43191bd8"
+    ],
+    "url": "https://ghibliapi.herokuapp.com/vehicles/d8f893b5-1dd9-41a1-9918-0099c1aa2de8"
+  },
+  {
+    "id": "923d70c9-8f15-4972-ad53-0128b261d628",
+    "name": "Sosuke's Boat",
+    "description": "A toy boat where Sosuke plays",
+    "vehicle_class": "Boat",
+    "length": "10",
+    "pilot": "https://ghibliapi.herokuapp.com/people/a10f64f3-e0b6-4a94-bf30-87ad8bc51607",
+    "films": [
+      "https://ghibliapi.herokuapp.com/films/758bf02e-3122-46e0-884e-67cf83df1786"
+    ],
+    "url": "https://ghibliapi.herokuapp.com/vehicles/923d70c9-8f15-4972-ad53-0128b261d628"
+  }
+] 
+ </msg>
+<msg timestamp="20211222 15:12:31.930" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20211222 15:12:30.925" endtime="20211222 15:12:31.930"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+</arguments>
+<msg timestamp="20211222 15:12:31.931" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20211222 15:12:31.931" endtime="20211222 15:12:31.931"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${response}</arg>
+</arguments>
+<msg timestamp="20211222 15:12:31.932" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20211222 15:12:31.932" endtime="20211222 15:12:31.932"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${response.json()}</arg>
+</arguments>
+<status status="PASS" starttime="20211222 15:12:31.932" endtime="20211222 15:12:31.934"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${response.json()[0]["id"]}</arg>
+</arguments>
+<assign>
+<var>${vehicleID}</var>
+</assign>
+<msg timestamp="20211222 15:12:31.936" level="INFO">${vehicleID} = 4e09b023-f650-4747-9ab9-eacf14540cfb</msg>
+<status status="PASS" starttime="20211222 15:12:31.935" endtime="20211222 15:12:31.936"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${vehicleID}</arg>
+</arguments>
+<msg timestamp="20211222 15:12:31.937" level="INFO">${vehicleID} = 4e09b023-f650-4747-9ab9-eacf14540cfb</msg>
+<status status="PASS" starttime="20211222 15:12:31.936" endtime="20211222 15:12:31.937"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${response.json()[1]["id"]}</arg>
+</arguments>
+<assign>
+<var>${vehicleID1}</var>
+</assign>
+<msg timestamp="20211222 15:12:31.937" level="INFO">${vehicleID1} = d8f893b5-1dd9-41a1-9918-0099c1aa2de8</msg>
+<status status="PASS" starttime="20211222 15:12:31.937" endtime="20211222 15:12:31.937"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${vehicleID1}</arg>
+</arguments>
+<msg timestamp="20211222 15:12:31.938" level="INFO">${vehicleID1} = d8f893b5-1dd9-41a1-9918-0099c1aa2de8</msg>
+<status status="PASS" starttime="20211222 15:12:31.938" endtime="20211222 15:12:31.938"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${response.json()[2]["id"]}</arg>
+</arguments>
+<assign>
+<var>${vehicleID2}</var>
+</assign>
+<msg timestamp="20211222 15:12:31.939" level="INFO">${vehicleID2} = 923d70c9-8f15-4972-ad53-0128b261d628</msg>
+<status status="PASS" starttime="20211222 15:12:31.938" endtime="20211222 15:12:31.939"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${vehicleID2}</arg>
+</arguments>
+<msg timestamp="20211222 15:12:31.939" level="INFO">${vehicleID2} = 923d70c9-8f15-4972-ad53-0128b261d628</msg>
+<status status="PASS" starttime="20211222 15:12:31.939" endtime="20211222 15:12:31.939"></status>
+</kw>
+<status status="PASS" starttime="20211222 15:12:30.921" endtime="20211222 15:12:31.940" critical="yes"></status>
+</test>
+<test id="s1-t2" name="Get Vehicles List by ID1">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>get_vehicle_list</arg>
+<arg>${base_url}</arg>
+<arg>verify=true</arg>
+</arguments>
+<msg timestamp="20211222 15:12:31.942" level="INFO">Creating Session using : alias=get_vehicle_list, url=https://ghibliapi.herokuapp.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20211222 15:12:31.942" endtime="20211222 15:12:31.942"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20211222 15:12:31.943" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20211222 15:12:31.943" endtime="20211222 15:12:31.943"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>get_vehicle_list</arg>
+<arg>${get_endpoint}/${vehicleID1}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20211222 15:12:32.919" level="INFO">GET Request : url=https://ghibliapi.herokuapp.com/vehicles//d8f893b5-1dd9-41a1-9918-0099c1aa2de8 
+ path_url=/vehicles//d8f893b5-1dd9-41a1-9918-0099c1aa2de8 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json'} 
+ body=None 
+ </msg>
+<msg timestamp="20211222 15:12:32.920" level="INFO">GET Response : url=https://ghibliapi.herokuapp.com/vehicles//d8f893b5-1dd9-41a1-9918-0099c1aa2de8 
+ status=200, reason=OK 
+ body={
+  "id": "d8f893b5-1dd9-41a1-9918-0099c1aa2de8",
+  "name": "Red Wing",
+  "description": "An experimental aircraft captured by Porco. Named Savoia S.21",
+  "vehicle_class": "Airplane",
+  "length": "20",
+  "pilot": "https://ghibliapi.herokuapp.com/people/6523068d-f5a9-4150-bf5b-76abe6fb42c3",
+  "films": [
+    "https://ghibliapi.herokuapp.com/films/ebbb6b7c-945c-41ee-a792-de0e43191bd8"
+  ],
+  "url": "https://ghibliapi.herokuapp.com/vehicles/d8f893b5-1dd9-41a1-9918-0099c1aa2de8"
+} 
+ </msg>
+<msg timestamp="20211222 15:12:32.920" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20211222 15:12:31.944" endtime="20211222 15:12:32.920"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+</arguments>
+<msg timestamp="20211222 15:12:32.921" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20211222 15:12:32.921" endtime="20211222 15:12:32.921"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${response}</arg>
+</arguments>
+<msg timestamp="20211222 15:12:32.922" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20211222 15:12:32.921" endtime="20211222 15:12:32.922"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${response.json()}</arg>
+</arguments>
+<status status="PASS" starttime="20211222 15:12:32.922" endtime="20211222 15:12:32.923"></status>
+</kw>
+<status status="PASS" starttime="20211222 15:12:31.941" endtime="20211222 15:12:32.923" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20211222 15:12:30.557" endtime="20211222 15:12:32.925"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0">Critical Tests</stat>
+<stat pass="2" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="2" fail="0" id="s1" name="Api Vehicles">Api Vehicles</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
